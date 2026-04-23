@@ -9,5 +9,5 @@ fn main() {
         std::process::exit(0);
     }
 
-    k_card_lib::run()
+    kcard_lib::run()
 }
