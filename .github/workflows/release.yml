@@ -24,10 +24,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # macos apple silicon
-          - os: macos-latest
-            label: macOS
-            args: "--target aarch64-apple-darwin"
           - os: windows-latest
             label: Windows
 
