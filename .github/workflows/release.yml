@@ -3,12 +3,12 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version tag (e.g. v1.0.0)'
-        required: true
+        description: "Version tag (e.g. v1.0.0) — leave empty to use the tag from the latest commit"
+        required: false
 
 concurrency:
   group: release-${{ github.ref }}
@@ -42,7 +42,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: pnpm
 
       - name: Setup Rust
@@ -67,13 +67,23 @@ jobs:
       - name: Install frontend dependencies
         run: pnpm install
 
+      - name: Resolve version tag
+        id: tag
+        run: |
+          if [ -n "${{ github.event.inputs.version }}" ]; then
+            echo "value=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            echo "value=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
+
       - name: Build and publish release
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: ${{ github.ref_name }}
-          releaseName: K Card ${{ github.ref_name }}
+          tagName: ${{ steps.tag.outputs.value }}
+          releaseName: K Card ${{ steps.tag.outputs.value }}
           releaseBody: |
             ## K Card ${{ github.ref_name }}
 
