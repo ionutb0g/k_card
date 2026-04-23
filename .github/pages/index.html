@@ -158,8 +158,10 @@
   </div>
 
   <script>
-    // Replace with your own GitHub user/repo
-    const REPO = 'YOUR_GITHUB_USERNAME/k_card';
+    // Auto-detect repo from GitHub Pages URL: username.github.io/reponame
+    const [, username] = window.location.hostname.match(/^(.+)\.github\.io$/) ?? [];
+    const repoName = window.location.pathname.split('/')[1];
+    const REPO = `${username}/${repoName}`;
     const API  = `https://api.github.com/repos/${REPO}/releases/latest`;
 
     fetch(API)
