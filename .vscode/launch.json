@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/xms1/Desktop/k_card",
+      "program": "/Users/xms1/Desktop/k_card/build/Debug/outDebug"
+    }
+  ]
+}
