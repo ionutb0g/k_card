@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "k_card",
+  "productName": "k-card",
   "version": "0.1.0",
-  "identifier": "com.xms.k_card",
+  "identifier": "com.xms.k-card",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "k_card",
+        "title": "k-card",
         "width": 800,
         "height": 600
       }
