@@ -1,6 +1,5 @@
 <script lang="ts">
   import { store } from "$lib/store.svelte";
-  import type { LockerEvent } from "$lib/types";
   import { save } from "@tauri-apps/plugin-dialog";
   import { invoke } from "@tauri-apps/api/core";
 
@@ -59,13 +58,13 @@
           {#each events as event (event.id)}
             <tr>
               <td class="time">{formatDate(event.timestamp)}</td>
-              <td class="locker-id">#{event.lockerId}</td>
+              <td class="locker-id">{event.lockerLabel}</td>
               <td>
                 <span class="badge {event.type}">
                   {event.type === "assigned" ? "Key given" : "Key returned"}
                 </span>
               </td>
-              <td class="qr">{(event as LockerEvent).qrCode ?? "—"}</td>
+              <td class="qr">{event.qrCode ?? "—"}</td>
             </tr>
           {/each}
         </tbody>

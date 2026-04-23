@@ -1,5 +1,12 @@
+export interface Partition {
+	id: string;
+	name: string;
+	lockerCount: number;
+}
+
 export interface Locker {
-	id: number;
+	partitionId: string;
+	index: number;
 	status: 'available' | 'in-use';
 	assignedQR?: string;
 	assignedAt?: string;
@@ -7,7 +14,7 @@ export interface Locker {
 
 export interface LockerEvent {
 	id: string;
-	lockerId: number;
+	lockerLabel: string;
 	type: 'assigned' | 'freed';
 	qrCode?: string;
 	timestamp: string;
@@ -15,7 +22,7 @@ export interface LockerEvent {
 
 export interface AppData {
 	settings: {
-		lockerCount: number;
+		partitions: Partition[];
 		qrPattern: string;
 	};
 	lockers: Locker[];
